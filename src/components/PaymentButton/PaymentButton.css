@@ -1,0 +1,46 @@
+.flower-container {
+  position: relative;
+  width: 600px; /* Konteyner genişliğini iki katına çıkardık */
+  height: 600px; /* Konteyner yüksekliğini iki katına çıkardık */
+  margin: 0 auto; /* Sayfa ortasında hizalar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flower-btn {
+  width: 200px; /* Buton genişliğini iki katına çıkardık */
+  height: 200px; /* Buton yüksekliğini iki katına çıkardık */
+  border-radius: 50%;
+  position: absolute;
+}
+
+.flower-btn:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.flower-btn:nth-child(2) {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.flower-btn:nth-child(3) {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%) translateX(-100%);
+}
+
+.flower-btn:nth-child(4) {
+  top: 100%;
+  left: 50%;
+  transform: translateY(-100%) translateX(-50%);
+}
+
+.flower-btn:nth-child(5) {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
