@@ -1,3 +1,44 @@
-.WaiterScreen {
-    /* CSS stilleriniz buraya */
-  }
+.WaiterContainer {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.WaiterContainer > *:nth-child(5) {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.WaiterContainer > *:nth-child(4) {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.WaiterContainer > *:nth-child(1) {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%) translateX(-100%);
+}
+
+.WaiterContainer > *:nth-child(3) {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateY(-100%) translateX(-50%);
+}
+
+.WaiterContainer > *:nth-child(2) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
