@@ -1,3 +1,8 @@
 .SeatPlan {
     /* CSS  */
   }
+
+  .seat-box {
+    background-color: #36486b; /* Lacivert renk */
+    color: white; /* Metin rengi */
+  }
