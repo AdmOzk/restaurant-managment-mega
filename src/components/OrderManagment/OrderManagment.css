@@ -1,0 +1,18 @@
+/* Örnek stil */
+h1 {
+  color: #36486b; /* Lacivert Renk */
+}
+
+button {
+  background-color: #4CAF50; /* Yeşil buton */
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}

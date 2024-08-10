@@ -1,0 +1,15 @@
+<div>
+  <h1>Table: {{ tableId }}</h1> <!-- Masa ID'si ekrana yazdırılıyor -->
+  <p>Manage orders, updates, cancellations, or bring the bill for this table.</p>
+
+  <!-- Örnek içerik: Bu masaya ait işlemler -->
+  <div>
+    <h2>Order Options for Table {{ tableId }}</h2>
+    <ul>
+      <li><button @click="createOrder">Create Order</button></li>
+      <li><button @click="updateOrder">Update Order</button></li>
+      <li><button @click="cancelOrder">Cancel Order</button></li>
+      <li><button @click="bringBill">Bring the Bill</button></li>
+    </ul>
+  </div>
+</div>
