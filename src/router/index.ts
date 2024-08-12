@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 import WaiterScreen from '../components/WaiterScreen/WaiterScreen.vue';
-import SeatPlan from '../components/SeatPlan/SeatPlan.vue'
+import SeatPlan from '../components/SeatPlan/SeatPlan.vue';
 import OrderManagment from '../components/OrderManagment/OrderManagment.vue';
-import Menu from '../components/Menu/Menu.vue'
+import Menu from '../components/Menu/Menu.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,13 +23,13 @@ const routes: Array<RouteRecordRaw> = [
     path: '/OrderManagment/:tableId', // Dinamik parametreli rota
     name: 'OrderManagment',
     component: OrderManagment,
-    props: true, // Bu, route parametresini prop olarak bileşene geçirir
+    props: true, // Route parametresini prop olarak geçirir
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+export default router;

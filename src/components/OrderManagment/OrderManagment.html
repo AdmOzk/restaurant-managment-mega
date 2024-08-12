@@ -1,14 +1,18 @@
 <div class="container mt-5 d-flex flex-column align-items-center justify-content-center vh-100">
   <div class="card text-center shadow-lg p-4">
     <div class="card-body">
-      <h1 class="card-title display-4 mb-4">Masa: {{ tableId }}</h1> <!-- Masa ID'si ekrana yazdırılıyor -->
+      <h1 class="card-title display-4 mb-4">Masa: {{ tableId }}</h1>
       <p class="lead">Sipariş İşlemleri Sayfası.</p>
       <hr class="my-4">
 
-      <!-- Örnek içerik: Bu masaya ait işlemler -->
-      <div class="my-5">
+      <!-- Active Orders -->
+      <div class="my-5" v-if="orderDetails.length">
         <h3 class="mb-4">Aktif Sipariş</h3>
-        <p>{{OrderDetails}}</p>
+        <ul>
+          <li v-for="(product, index) in orderDetails" :key="index">
+            {{ product.name }} - {{ product.quantity }}
+          </li>
+        </ul>
       </div>
 
       <h2 class="mb-4">Masa {{ tableId }} İçin seçenekler</h2>

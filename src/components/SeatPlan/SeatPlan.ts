@@ -3,8 +3,6 @@ import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'SeatPlan',
-  // TS 
-
   setup() {
     const router = useRouter();
 
@@ -13,10 +11,7 @@ export default defineComponent({
     }
 
     return {
-      navigateToTable, // Bu fonksiyonu template kısmında kullanabilmek için return ediyoruz
+      navigateToTable,
     };
-  }
-
-
-
+  },
 });
