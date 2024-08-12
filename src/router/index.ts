@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import WaiterScreen from '../components/WaiterScreen/WaiterScreen.vue';
 import SeatPlan from '../components/SeatPlan/SeatPlan.vue'
 import OrderManagment from '../components/OrderManagment/OrderManagment.vue';
+import Menu from '../components/Menu/Menu.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -13,6 +14,10 @@ const routes: Array<RouteRecordRaw> = [
   { 
     path: '/SeatPlan', 
     component: SeatPlan 
+  },
+  { 
+    path: '/Menu', 
+    component: Menu 
   },
   {
     path: '/OrderManagment/:tableId', // Dinamik parametreli rota

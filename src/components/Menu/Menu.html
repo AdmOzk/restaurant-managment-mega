@@ -1,3 +1,33 @@
-<div class="Menu">
-    <!-- HTML -->
+<div class="container my-5">
+  <div class="Menu">
+     <h2 class="text-center">Menu</h2>
+     <br>
+    <!-- Repeat this block for each product -->
+    <div class="row align-items-center mb-3 p-3 border rounded shadow-sm bg-light">
+      <!-- Product Image -->
+      <div class="col-2 text-center">
+        <img src="@/assets/cheeseburger.jpg" alt="Product Image" class="img-fluid rounded-circle shadow-sm" style="max-width: 60px;">
+      </div>
+      
+      <!-- Ürün resmi ile isim arasında boşluk oluşturmak için buraya bir ek div -->
+      <div class="col-1"></div>
+
+      <!-- Product Name -->
+      <div class="col-3">
+        <h5 class="mb-0 fw-bold">Ürün İsmi</h5>
+      </div>
+
+      <!-- Product Price -->
+      <div class="col-2 text-end">
+        <h6 class="mb-0 text-success">₺XX.XX</h6>
+      </div>
+
+      <!-- Add/Remove Buttons -->
+      <div class="col-4 text-end">
+        <button class="btn btn-outline-danger btn-sm rounded-circle shadow-sm">-</button>
+        <span class="mx-3 fw-bold">0</span> <!-- This would be your product quantity -->
+        <button class="btn btn-outline-success btn-sm rounded-circle shadow-sm">+</button>
+      </div>
+    </div>
   </div>
+</div>

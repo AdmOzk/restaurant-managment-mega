@@ -1,15 +1,23 @@
-<div>
-  <h1>Table: {{ tableId }}</h1> <!-- Masa ID'si ekrana yazdırılıyor -->
-  <p>Manage orders, updates, cancellations, or bring the bill for this table.</p>
+<div class="container mt-5 d-flex flex-column align-items-center justify-content-center vh-100">
+  <div class="card text-center shadow-lg p-4">
+    <div class="card-body">
+      <h1 class="card-title display-4 mb-4">Masa: {{ tableId }}</h1> <!-- Masa ID'si ekrana yazdırılıyor -->
+      <p class="lead">Sipariş İşlemleri Sayfası.</p>
+      <hr class="my-4">
 
-  <!-- Örnek içerik: Bu masaya ait işlemler -->
-  <div>
-    <h2>Order Options for Table {{ tableId }}</h2>
-    <ul>
-      <li><button @click="createOrder">Create Order</button></li>
-      <li><button @click="updateOrder">Update Order</button></li>
-      <li><button @click="cancelOrder">Cancel Order</button></li>
-      <li><button @click="bringBill">Bring the Bill</button></li>
-    </ul>
+      <!-- Örnek içerik: Bu masaya ait işlemler -->
+      <div class="my-5">
+        <h3 class="mb-4">Aktif Sipariş</h3>
+        <p>{{OrderDetails}}</p>
+      </div>
+
+      <h2 class="mb-4">Masa {{ tableId }} İçin seçenekler</h2>
+      <ul class="list-unstyled">
+        <li class="mb-3"><button class="btn btn-success btn-lg w-100" @click="createOrder">Sipariş Al</button></li>
+        <li class="mb-3"><button class="btn btn-warning btn-lg w-100" @click="updateOrder">Siparişi Güncelle</button></li>
+        <li class="mb-3"><button class="btn btn-danger btn-lg w-100" @click="cancelOrder">Siparişi İptal et</button></li>
+        <li class="mb-3"><button class="btn btn-info btn-lg w-100" @click="bringBill">Hesap</button></li>
+      </ul>
+    </div>
   </div>
 </div>

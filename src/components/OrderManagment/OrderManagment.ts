@@ -6,8 +6,14 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    OrderDetails: {
+      type :String
+    },
   },
   methods: {
+     OrderDetails(){
+      alert(`Order is ${this.tableId}`);
+     },
     createOrder() {
       alert(`Creating order for Table ${this.tableId}`);
     },
