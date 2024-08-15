@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router';
 interface Product {
   name: string;
   quantity: number;
+  price: number;
 }
 
 export default defineComponent({
@@ -21,18 +22,15 @@ export default defineComponent({
     const orderDetails = ref<Product[]>([]);
     const originalOrderDetails = ref<Product[]>([]);
     const isEditing = ref(false);
+    const isBringCalled = ref(false); // Show Bill screen state
+    const totalAmount = ref(0);
 
     const loadOrderDetails = () => {
       const storedOrderDetails = localStorage.getItem(`order-${tableId}`);
       if (storedOrderDetails) {
         orderDetails.value = JSON.parse(storedOrderDetails);
-        originalOrderDetails.value = JSON.parse(storedOrderDetails);
+        totalAmount.value = calculateTotalAmount(orderDetails.value);
       }
-    };
-
-    const saveOrderDetails = () => {
-      localStorage.setItem(`order-${tableId}`, JSON.stringify(orderDetails.value));
-      console.log("Order details saved:", orderDetails.value);
     };
 
     const toggleEdit = () => {
@@ -42,6 +40,15 @@ export default defineComponent({
         originalOrderDetails.value = JSON.parse(JSON.stringify(orderDetails.value));
       }
       isEditing.value = !isEditing.value;
+    };
+
+    const toggleBringBill = () => {
+      if (isBringCalled.value) {
+        orderDetails.value = JSON.parse(JSON.stringify(originalOrderDetails.value));
+      } else {
+        originalOrderDetails.value = JSON.parse(JSON.stringify(orderDetails.value));
+      }
+      isBringCalled.value = !isBringCalled.value;
     };
 
     const createOrder = () => {
@@ -61,25 +68,38 @@ export default defineComponent({
     };
 
     const saveChanges = () => {
-      saveOrderDetails();
+      localStorage.setItem(`order-${tableId}`, JSON.stringify(orderDetails.value));
       isEditing.value = false;
-      loadOrderDetails(); // Aktif siparişleri güncelle
+      loadOrderDetails();
       console.log("Changes saved successfully!");
     };
 
     const cancelOrder = () => {
       orderDetails.value.forEach(product => (product.quantity = 0));
-      saveOrderDetails();
+      localStorage.setItem(`order-${tableId}`, JSON.stringify(orderDetails.value));
       console.log('Order has been canceled');
-      loadOrderDetails(); // Sipariş iptal edildikten sonra aktif siparişleri güncelle
+      loadOrderDetails();
     };
 
-    const bringBill = () => {
-      alert('Hesap getiriliyor...');
+    const calculateTotalAmount = (orders: Product[]) => {
+      return orders.reduce((total, product) => {
+        return total + (product.quantity * product.price);
+      }, 0);
     };
 
     const goToSeatPlan = () => {
       router.push('/SeatPlan');
+    };
+
+    const goBackToOrderManagement = () => {
+      isBringCalled.value = false;
+    };
+
+    const PaymentCompleted = () => {
+      orderDetails.value.forEach(product => (product.quantity = 0));
+      localStorage.setItem(`order-${tableId}`, JSON.stringify(orderDetails.value));
+      alert('Ödeme Tamamlandı!');
+      goBackToOrderManagement();
     }
 
     onMounted(() => {
@@ -94,10 +114,14 @@ export default defineComponent({
       decreaseQuantity,
       saveChanges,
       cancelOrder,
-      bringBill,
-      isEditing,
       toggleEdit,
+      toggleBringBill,
+      isEditing,
+      isBringCalled,
+      totalAmount,
       goToSeatPlan,
+      goBackToOrderManagement,
+      PaymentCompleted,
     };
   },
 });

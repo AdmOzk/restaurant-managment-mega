@@ -1,13 +1,30 @@
 
-  <div class="container mt-5 d-flex flex-column align-items-center justify-content-center vh-100">
+ <div class="container mt-5 d-flex flex-column align-items-center justify-content-center vh-100">
     <div class="card text-center shadow-lg p-4">
       <div class="card-body">
         <h1 class="card-title display-4 mb-4">Masa: {{ tableId }}</h1>
-        <p class="lead">Sipariş İşlemleri Sayfası.</p>
-        <hr class="my-4">
+        <p v-if="!isBringCalled" class="lead">Sipariş İşlemleri Sayfası.</p>
+        <p v-else class="lead">Hesap Özeti</p>
+        <hr class="my-4" />
+
+        <!-- Bill Summary -->
+        <div v-if="isBringCalled">
+          <h2 class="mb-4">Hesap Özeti</h2>
+          <ul class="list-unstyled">
+            <li v-for="(product, index) in orderDetails" :key="index" class="mb-3">
+              <div v-if="!isEditing && product.quantity > 0">
+              {{ product.name }} - {{ product.quantity }} x {{ product.price }} TL = {{ product.quantity * product.price }} TL
+              </div>
+            </li>
+          </ul>
+          <hr class="my-4">
+          <h2>Toplam: {{ totalAmount }} TL</h2>
+          <button class="btn btn-secondary mt-4" @click="goBackToOrderManagement">Sipariş İşlemlerine Dön</button>
+          <button class="btn btn-success mt-4" @click="PaymentCompleted">Ödeme Alındı</button>
+        </div>
 
         <!-- Active Orders -->
-        <div class="my-5" v-if="orderDetails.length">
+        <div v-if="orderDetails.length && !isBringCalled">
           <u><h3 class="mb-4">Aktif Sipariş</h3></u>
           <ul>
             <ul v-for="(product, index) in orderDetails" :key="index">
@@ -28,19 +45,21 @@
         </div>
 
         <!-- Options -->
-        <h2 class="mb-4">Masa {{ tableId }} İçin Seçenekler</h2>
-        <ul class="list-unstyled">
-          <li class="mb-3"><button class="btn btn-success btn-lg w-100" @click="createOrder" v-if="!isEditing">Sipariş Al</button></li>
-          <li class="mb-3"><button class="btn btn-warning btn-lg w-100" @click="toggleEdit" v-if="!isEditing">Siparişi Güncelle</button></li>
-          <li class="mb-3"><button class="btn btn-danger btn-lg w-100" @click="cancelOrder" v-if="!isEditing">Siparişi İptal et</button></li>
-          <li class="mb-3"><button class="btn btn-info btn-lg w-100" @click="bringBill" v-if="!isEditing">Hesap</button></li>
-          <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="saveChanges" v-if="isEditing">Değişiklikleri Kaydet</button></li>
-          <li class="mb-3"><button class="btn btn-secondary btn-lg w-100" @click="toggleEdit" v-if="isEditing">İptal</button></li>
-        </ul>
-        <br>
-        <ul class="list-unstyled">
-          <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="goToSeatPlan" v-if="!isEditing">Masalara Dön</button></li>
-        </ul>
+        <div v-if="!isBringCalled">
+          <h2 class="mb-4">Masa {{ tableId }} İçin Seçenekler</h2>
+          <ul class="list-unstyled">
+            <li class="mb-3"><button class="btn btn-success btn-lg w-100" @click="createOrder" v-if="!isEditing">Sipariş Al</button></li>
+            <li class="mb-3"><button class="btn btn-warning btn-lg w-100" @click="toggleEdit" v-if="!isEditing">Siparişi Güncelle</button></li>
+            <li class="mb-3"><button class="btn btn-danger btn-lg w-100" @click="cancelOrder" v-if="!isEditing">Siparişi İptal et</button></li>
+            <li class="mb-3"><button class="btn btn-info btn-lg w-100" @click="toggleBringBill" v-if="!isEditing">Hesap</button></li>
+            <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="saveChanges" v-if="isEditing">Değişiklikleri Kaydet</button></li>
+            <li class="mb-3"><button class="btn btn-secondary btn-lg w-100" @click="toggleEdit" v-if="isEditing">İptal</button></li>
+          </ul>
+          <br>
+          <ul class="list-unstyled">
+            <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="goToSeatPlan" v-if="!isEditing">Masalara Dön</button></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
