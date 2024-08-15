@@ -18,45 +18,70 @@ export default defineComponent({
     const router = useRouter();
     const tableId = props.tableId || (route.params.tableId as string);
 
-    // Initialize orderDetails as a ref
     const orderDetails = ref<Product[]>([]);
+    const originalOrderDetails = ref<Product[]>([]);
+    const isEditing = ref(false);
 
-    // Load order details from localStorage
     const loadOrderDetails = () => {
       const storedOrderDetails = localStorage.getItem(`order-${tableId}`);
       if (storedOrderDetails) {
         orderDetails.value = JSON.parse(storedOrderDetails);
+        originalOrderDetails.value = JSON.parse(storedOrderDetails);
       }
     };
 
-    // Save order details to localStorage
     const saveOrderDetails = () => {
       localStorage.setItem(`order-${tableId}`, JSON.stringify(orderDetails.value));
+      console.log("Order details saved:", orderDetails.value);
     };
 
-    // Function to handle order creation
+    const toggleEdit = () => {
+      if (isEditing.value) {
+        orderDetails.value = JSON.parse(JSON.stringify(originalOrderDetails.value));
+      } else {
+        originalOrderDetails.value = JSON.parse(JSON.stringify(orderDetails.value));
+      }
+      isEditing.value = !isEditing.value;
+    };
+
     const createOrder = () => {
       router.push({ path: '/Menu', query: { tableId } });
     };
 
-    // Function to handle order update
-    const updateOrder = () => {
-      // Implement functionality to show current orders with + and - buttons
+    const increaseQuantity = (product: Product) => {
+      product.quantity += 1;
     };
 
-    // Function to handle order cancellation
+    const decreaseQuantity = (product: Product) => {
+      if (product.quantity > 1) {
+        product.quantity -= 1;
+      } else if (product.quantity === 1) {
+        product.quantity = 0;
+      }
+    };
+
+    const saveChanges = () => {
+      saveOrderDetails();
+      isEditing.value = false;
+      loadOrderDetails(); // Aktif siparişleri güncelle
+      console.log("Changes saved successfully!");
+    };
+
     const cancelOrder = () => {
-      orderDetails.value = []; // Clear local orders
-      saveOrderDetails(); // Save cleared order details
+      orderDetails.value.forEach(product => (product.quantity = 0));
+      saveOrderDetails();
       console.log('Order has been canceled');
+      loadOrderDetails(); // Sipariş iptal edildikten sonra aktif siparişleri güncelle
     };
 
-    // Function to handle bringing the bill
     const bringBill = () => {
       alert('Hesap getiriliyor...');
     };
 
-    // Load order details when the component is mounted
+    const goToSeatPlan = () => {
+      router.push('/SeatPlan');
+    }
+
     onMounted(() => {
       loadOrderDetails();
     });
@@ -65,9 +90,14 @@ export default defineComponent({
       tableId,
       orderDetails,
       createOrder,
-      updateOrder,
+      increaseQuantity,
+      decreaseQuantity,
+      saveChanges,
       cancelOrder,
       bringBill,
+      isEditing,
+      toggleEdit,
+      goToSeatPlan,
     };
   },
 });

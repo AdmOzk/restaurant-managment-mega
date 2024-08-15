@@ -1,18 +1,18 @@
 import { defineComponent, ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 interface Product {
   name: string;
   quantity: number;
-  price: number; // Ensure this property is included
+  price: number;
 }
 
 export default defineComponent({
   setup() {
     const route = useRoute();
+    const router = useRouter();
     const tableId = route.query.tableId as string;
 
-    // Static menu items
     const menuProducts: Product[] = [
       { name: 'Cheeseburger', quantity: 0, price: 35.00 },
       { name: 'Margherita Pizza', quantity: 0, price: 45.00 },
@@ -26,7 +26,6 @@ export default defineComponent({
       const storedProducts = localStorage.getItem(`order-${tableId}`);
       if (storedProducts) {
         const storedProductsArray = JSON.parse(storedProducts) as Product[];
-        // Update products with the quantities from local storage
         products.value.forEach(product => {
           const storedProduct = storedProductsArray.find(p => p.name === product.name);
           if (storedProduct) {
@@ -60,11 +59,14 @@ export default defineComponent({
         if (existingProduct.quantity > 1) {
           existingProduct.quantity -= 1;
         } else if (existingProduct.quantity === 1) {
-          // Keep the product with quantity 0
           existingProduct.quantity = 0;
         }
         saveProducts();
       }
+    };
+
+    const goToOrderManagement = () => {
+      router.push({ path: `/OrderManagment/${tableId}` });
     };
 
     return {
@@ -72,6 +74,7 @@ export default defineComponent({
       products,
       addProductToOrder,
       removeProductFromOrder,
+      goToOrderManagement,
     };
   },
 });

@@ -10,8 +10,13 @@ export default defineComponent({
       router.push({ path: `/OrderManagment/${tableId}` });
     }
 
+    function navigateToMain() {
+      router.push({ path: `/` });
+    }
+
     return {
       navigateToTable,
+      navigateToMain,
     };
   },
 });
