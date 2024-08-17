@@ -4,6 +4,7 @@ import WaiterScreen from '../components/WaiterScreen/WaiterScreen.vue';
 import SeatPlan from '../components/SeatPlan/SeatPlan.vue';
 import OrderManagment from '../components/OrderManagment/OrderManagment.vue';
 import Menu from '../components/Menu/Menu.vue';
+import CalendarView from '../components/CalendarView/CalendarView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -24,6 +25,10 @@ const routes: Array<RouteRecordRaw> = [
     name: 'OrderManagment',
     component: OrderManagment,
     props: true, // Route parametresini prop olarak geçirir
+  },
+  {
+    path: '/CalendarView', 
+    component: CalendarView
   },
 ];
 
