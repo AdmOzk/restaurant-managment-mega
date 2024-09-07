@@ -54,22 +54,14 @@ export default defineComponent({
       return exampleShifts.hasOwnProperty(formattedDay);
     };
 
-    const selectDate = (day: number): void => {
-      selectedDate.value = `${String(day).padStart(2, '0')}-${String(currentMonthIndex.value + 1).padStart(2, '0')}-${currentYear.value}`;
-    };
-
-    const isSelectedDay = (day: number): boolean => {
-      const formattedDay = `${String(day).padStart(2, '0')}-${String(currentMonthIndex.value + 1).padStart(2, '0')}-${currentYear.value}`;
-      return formattedDay === selectedDate.value;
-    };
-
-    const isToday = (day: number): boolean => {
-      return (
-        day === today.getDate() &&
-        currentMonthIndex.value === today.getMonth() &&
-        currentYear.value === today.getFullYear()
-      );
-    };
+    // Bugünkü vardiya bilgilerini kontrol eden computed
+    const todayShiftInfo = computed(() => {
+      const formattedDay = `${String(today.getDate()).padStart(2, '0')}-${String(today.getMonth() + 1).padStart(2, '0')}-${today.getFullYear()}`;
+      if (exampleShifts[formattedDay]) {
+        return `Bugünkü vardiyanız: ${exampleShifts[formattedDay].startTime} - ${exampleShifts[formattedDay].endTime}`;
+      }
+      return 'Bugün vardiyanız yok.';
+    });
 
     const prevMonth = (): void => {
       if (currentMonthIndex.value === 0) {
@@ -87,6 +79,27 @@ export default defineComponent({
       } else {
         currentMonthIndex.value += 1;
       }
+    };
+
+    const selectDate = (day: number): void => {
+      selectedDate.value = `${String(day).padStart(2, '0')}-${String(currentMonthIndex.value + 1).padStart(2, '0')}-${currentYear.value}`;
+    };
+
+    const clearDate = (): void => {
+      selectedDate.value = null;
+    };
+
+    const isToday = (day: number): boolean => {
+      return (
+        day === today.getDate() &&
+        currentMonthIndex.value === today.getMonth() &&
+        currentYear.value === today.getFullYear()
+      );
+    };
+
+    const isSelectedDay = (day: number): boolean => {
+      const formattedDay = `${String(day).padStart(2, '0')}-${String(currentMonthIndex.value + 1).padStart(2, '0')}-${currentYear.value}`;
+      return formattedDay === selectedDate.value;
     };
 
     const router = useRouter();
@@ -113,11 +126,12 @@ export default defineComponent({
       prevMonth,
       nextMonth,
       selectDate,
-      clearDate: () => selectedDate.value = null,
+      clearDate,
       isToday,
       isSelectedDay,
       hasShift,
       formattedToday,
+      todayShiftInfo, 
       navigateToMain,
       showPopup,
       showEventPopup,

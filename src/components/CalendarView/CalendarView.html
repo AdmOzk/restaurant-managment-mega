@@ -1,9 +1,11 @@
 <div class="calendar-container">
-  <!-- Display the current date outside the calendar -->
+  <!-- Bugünkü tarihi göster -->
   <div class="current-date">
     Bugünkü Tarih: {{ formattedToday }}
+    <p>{{ todayShiftInfo }}</p> <!-- Bugünkü vardiya bilgisi -->
   </div>
 
+  <!-- Takvim -->
   <div class="calendar-header">
     <button @click="prevMonth" class="nav-button">‹</button>
     <span class="month-year">{{ currentMonth }} {{ currentYear }}</span>
@@ -18,13 +20,13 @@
       class="day blank"
     ></div>
     <div
-    v-for="day in daysInMonth"
-    :key="day"
-    :class="['day', { 'current-day': isToday(day), 'selected': isSelectedDay(day), 'shift-day': hasShift(day) }]"
-    @click="selectDate(day)"
-  >
-    {{ day }}
-  </div>
+      v-for="day in daysInMonth"
+      :key="day"
+      :class="['day', { 'current-day': isToday(day), 'selected': isSelectedDay(day), 'shift-day': hasShift(day) }]"
+      @click="selectDate(day)"
+    >
+      {{ day }}
+    </div>
   </div>
 
   <div class="calendar-details">
@@ -33,7 +35,7 @@
     <button @click="showEventPopup" class="show-popup-button" :disabled="!selectedDate">Etkinliği Göster</button>
   </div>
 
-  <!-- Display pop-up if the showPopup is true, passing selectedDate as prop -->
+  <!-- Pop-up eklenecek -->
   <CalendarEventPopUp v-if="showPopup" :selectedDate="selectedDate" @close="closeEventPopup" />
 </div>
 
