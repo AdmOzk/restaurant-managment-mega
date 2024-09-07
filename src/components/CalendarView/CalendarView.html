@@ -18,24 +18,23 @@
       class="day blank"
     ></div>
     <div
-      v-for="day in daysInMonth"
-      :key="day"
-      :class="['day', { 'current-day': isToday(day) && !isSelectedDay(day), 'selected': isSelectedDay(day) }]"
-      @click="selectDate(day)"
-    >
-      {{ day }}
-    </div>
+    v-for="day in daysInMonth"
+    :key="day"
+    :class="['day', { 'current-day': isToday(day), 'selected': isSelectedDay(day), 'shift-day': hasShift(day) }]"
+    @click="selectDate(day)"
+  >
+    {{ day }}
+  </div>
   </div>
 
   <div class="calendar-details">
     <h5>Seçilen Tarih: {{ selectedDate || 'Tarih Seçilmedi' }}</h5>
     <button @click="clearDate" class="clear-button">Seçimi Temizle</button>
-    <button @click="showEventPopup" class="show-popup-button">Etkinliği Göster</button>
+    <button @click="showEventPopup" class="show-popup-button" :disabled="!selectedDate">Etkinliği Göster</button>
   </div>
 
-  <!-- Display pop-up if the showPopup is true -->
-  <CalendarEventPopUp v-if="showPopup" @close="closeEventPopup" />
-
+  <!-- Display pop-up if the showPopup is true, passing selectedDate as prop -->
+  <CalendarEventPopUp v-if="showPopup" :selectedDate="selectedDate" @close="closeEventPopup" />
 </div>
 
 <!-- Navigation button section -->
@@ -43,7 +42,9 @@
 <div class="row justify-content-center mb-3">
   <div class="col-12 text-center">
     <ul class="list-unstyled">
-      <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="navigateToMain">Ana sayfaya dön</button></li>
+      <li class="mb-3">
+        <button class="btn btn-primary btn-lg w-100" @click="navigateToMain">Ana sayfaya dön</button>
+      </li>
     </ul>
   </div>
 </div>

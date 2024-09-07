@@ -34,6 +34,8 @@
   align-items: center;
   height: 40px;
   font-size: 16px;
+  border-radius: 50%; /* Günlerin daire şekli */
+  cursor: pointer; /* Tıklanabilir günler */
 }
 
 .day.current-day {
@@ -43,11 +45,30 @@
 }
 
 .day.selected {
-  background-color: #007bff;
+  background-color: #007bff; /* Seçilen gün */
   color: white;
   border-radius: 50%;
 }
 
+/* Vardiya olan gün */
+.day.shift-day {
+  background-color: #17a2b8; /* Açık mavi */
+  color: white;
+  border-radius: 50%;
+}
+
+/* Eğer gün hem seçili hem de vardiyalıysa, selected stili uygulanacak */
+.day.shift-day.selected {
+  background-color: #007bff; /* Seçilen gün rengi (öncelikli) */
+  color: white;
+}
+
+/* Boş günler için stil */
+.day.blank {
+  background-color: transparent;
+}
+
+/* Mevcut tarihin gösterimi */
 .current-date {
   text-align: center;
   margin-bottom: 20px;
@@ -55,31 +76,22 @@
   font-weight: bold;
 }
 
-.day.blank {
-  background-color: transparent;
-}
-
-.calendar-details {
-  margin-top: 20px;
-  text-align: center;
-}
-
+/* Buton stilleri */
+.clear-button,
 .show-popup-button {
   margin-top: 10px;
   padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .clear-button {
-  margin-top: 10px;
-  padding: 5px 10px;
   background-color: #dc3545;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+}
+
+.show-popup-button {
+  background-color: #007bff;
+  color: white;
 }
