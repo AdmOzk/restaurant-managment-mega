@@ -1,15 +1,18 @@
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref,computed } from 'vue';
 import { useRouter } from 'vue-router';
+import CalendarEventPopUp from '../Popups/CalendarEventPopUp/CalendarEventPopUp.vue'; // Two levels up
 
 export default defineComponent({
   name: 'CalendarView',
+  components: {
+    CalendarEventPopUp,
+  },
   setup() {
-
-
     const today = new Date();
     const selectedDate = ref<string | null>(null);
     const currentMonthIndex = ref(today.getMonth());
     const currentYear = ref(today.getFullYear());
+    const showPopup = ref(false); // State for controlling pop-up visibility
 
     const months = [
       'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
@@ -54,12 +57,6 @@ export default defineComponent({
       }
     };
 
-    const router = useRouter();
-
-    function navigateToMain() {
-      router.push({ path: `/` });
-    }
-
     const nextMonth = () => {
       if (currentMonthIndex.value === 11) {
         currentMonthIndex.value = 0;
@@ -90,6 +87,20 @@ export default defineComponent({
       return formattedDay === selectedDate.value;
     };
 
+    const router = useRouter();
+
+    const navigateToMain = () => {
+      router.push({ path: '/' });
+    };
+
+    const showEventPopup = () => {
+      showPopup.value = true;
+    };
+
+    const closeEventPopup = () => {
+      showPopup.value = false;
+    };
+
     return {
       days,
       daysInMonth,
@@ -105,6 +116,9 @@ export default defineComponent({
       isSelectedDay,
       formattedToday,
       navigateToMain,
+      showPopup,
+      showEventPopup,
+      closeEventPopup,
     };
   },
 });
