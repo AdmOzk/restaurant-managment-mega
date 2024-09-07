@@ -1,3 +1,75 @@
-.CalendarView {
-    /* CSS  */
-  }
+.calendar-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.day-name,
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  font-size: 16px;
+}
+
+.day.current-day {
+  background-color: #e3e3e3;
+  color: white;
+  border-radius: 50%;
+}
+
+.day.selected {
+  background-color: #007bff; /* Green color for selected day */
+  color: white;
+  border-radius: 50%;
+}
+
+.current-date {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.day.blank {
+  background-color: transparent;
+}
+
+.calendar-details {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.clear-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

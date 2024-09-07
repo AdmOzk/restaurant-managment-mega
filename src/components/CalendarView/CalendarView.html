@@ -1,4 +1,41 @@
-<div class="CalendarView">
-    <!-- HTML -->
-     calendar
+<div class="calendar-container">
+  <!-- Display the current date outside the calendar -->
+  <div class="current-date">
+    Bugünkü Tarih: {{ formattedToday }}
   </div>
+  
+  <div class="calendar-header">
+    <button @click="prevMonth" class="nav-button">‹</button>
+    <span class="month-year">{{ currentMonth }} {{ currentYear }}</span>
+    <button @click="nextMonth" class="nav-button">›</button>
+  </div>
+  <div class="calendar-grid">
+    <div class="day-name" v-for="day in days" :key="day">{{ day }}</div>
+    <div
+      v-for="day in blankDays"
+      :key="`blank-${day}`"
+      class="day blank"
+    ></div>
+    <div
+      v-for="day in daysInMonth"
+      :key="day"
+      :class="['day', { 'current-day': isToday(day) && !isSelectedDay(day), 'selected': isSelectedDay(day) }]"
+      @click="selectDate(day)"
+    >
+      {{ day }}
+    </div>
+  </div>
+  <div class="calendar-details">
+    <h5>Seçilen Tarih: {{ selectedDate || 'Tarih Seçilmedi' }}</h5>
+    <button @click="clearDate" class="clear-button">Seçimi Temizle</button>
+  </div>
+</div>
+
+<br><br><br><br>
+<div class="row justify-content-center mb-3">
+  <div class="col-12 text-center">
+    <ul class="list-unstyled">
+      <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="navigateToMain" v-if="!isEditing">Ana sayfaya dön</button></li>
+    </ul>
+  </div>
+</div>
