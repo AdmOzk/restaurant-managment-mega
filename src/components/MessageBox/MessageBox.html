@@ -1,0 +1,85 @@
+ <!-- Kullanıcı Listesi ve Yeni Konuşma Başlat Butonu (Sadece aktif bir kullanıcı yoksa görünür) -->
+  <div class="user-list-container" v-if="!activeUser">
+    <h3>Kullanıcılar</h3>
+    <ul class="list-group">
+      <li
+        v-for="user in users"
+        :key="user.name"
+        @click="selectUser(user)"
+        class="list-group-item d-flex justify-content-between align-items-center user-list-item"
+      >
+        <div class="user-info">
+          <img
+            :src="getProfilePicture(user.name)"
+            alt="Profile Picture"
+            class="user-profile-picture rounded-circle mr-2"
+          />
+          <span>{{ user.name }}</span>
+        </div>
+        <span v-if="user.unreadMessages > 0" class="badge badge-danger">
+          {{ user.unreadMessages }}!
+        </span>
+      </li>
+    </ul>
+
+    <!-- Yeni Sohbet Başlat Butonu (Sadece aktif kullanıcı yoksa görünür) -->
+    <button @click="startNewConversation" class="btn btn-success mt-3">Mesaj Gönder</button>
+  </div>
+
+  <!-- Mesajlaşma Ekranı -->
+  <div class="message-box-container" v-if="activeUser">
+    <div class="message-list">
+      <div
+        class="message-item"
+        v-for="message in filteredMessages"
+        :key="message.id"
+        :class="message.sender === 'me' ? 'my-message' : 'other-message'"
+      >
+        <img
+          v-if="message.sender === 'other'"
+          :src="message.profilePicture"
+          class="profile-picture"
+          alt="Sender Profile Picture"
+        />
+        <div class="message-content">
+          <p>{{ message.text }}</p>
+          <span class="message-time">{{ message.time }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mesaj Giriş Alanı -->
+    <div class="message-input">
+      <input
+        type="text"
+        v-model="newMessage"
+        placeholder="Type a message..."
+        @keyup.enter="sendMessage"
+        class="form-control"
+      />
+      <button @click="sendMessage" class="btn btn-primary">Send</button>
+    </div>
+
+    <!-- Geri Dön Butonu -->
+    <button @click="goBack" class="btn btn-danger mt-3">Geri Dön</button>
+  </div>
+
+  <!-- Yeni Sohbet Başlatma Ekranı (Sadece aktif kullanıcı yoksa görünür) -->
+  <div v-if="!activeUser && showNewConversationScreen" class="new-conversation-container">
+    <h3>Yeni Konuşma Başlat</h3>
+    <ul class="list-group">
+      <li
+        v-for="user in users"
+        :key="user.name"
+        @click="selectUserForNewConversation(user)"
+        class="list-group-item user-list-item"
+      >
+        <img
+          :src="getProfilePicture(user.name)"
+          alt="Profile Picture"
+          class="user-profile-picture rounded-circle mr-2"
+        />
+        <span>{{ user.name }}</span>
+      </li>
+    </ul>
+  </div>

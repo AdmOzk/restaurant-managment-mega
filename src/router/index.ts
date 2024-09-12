@@ -5,6 +5,7 @@ import SeatPlan from '../components/SeatPlan/SeatPlan.vue';
 import OrderManagment from '../components/OrderManagment/OrderManagment.vue';
 import Menu from '../components/Menu/Menu.vue';
 import CalendarView from '../components/CalendarView/CalendarView.vue';
+import MessageBox from '../components/MessageBox/MessageBox.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/CalendarView', 
     component: CalendarView
+  },
+  {
+    path: '/MessageBox', 
+    component: MessageBox
   },
 ];
 
