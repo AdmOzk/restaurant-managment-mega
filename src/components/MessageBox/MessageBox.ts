@@ -24,7 +24,7 @@ export default defineComponent({
     const users = ref<User[]>([
       { name: 'Ahmet', unreadMessages: 2 },
       { name: 'Mehmet', unreadMessages: 1 },
-      { name: 'Ayşe', unreadMessages: 3 },
+      { name: 'Dilara', unreadMessages: 3 },
     ]);
 
     // Mesajlar (Dummy Data)
@@ -55,8 +55,8 @@ export default defineComponent({
       {
         id: 4,
         sender: 'other',
-        userName: 'Ayşe',
-        text: 'Message from Ayşe.',
+        userName: 'Dilara',
+        text: 'Message from Dilara.',
         time: '10:10 AM',
         profilePicture: require('@/assets/dilara.jpg'),
       },
@@ -111,7 +111,7 @@ export default defineComponent({
           return require('@/assets/ahmet.jpg');
         case 'Mehmet':
           return require('@/assets/mehmet.jpg');
-        case 'Ayşe':
+        case 'Dilara':
           return require('@/assets/dilara.jpg');
         default:
           return '';
