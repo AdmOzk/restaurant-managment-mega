@@ -101,6 +101,10 @@ export default defineComponent({
       showNewConversationScreen.value = false;
     };
 
+    const navigateToMain = (): void => {
+      router.push({ path: '/' });
+    };
+
     const goBack = () => {
       activeUser.value = null;
     };
@@ -131,6 +135,7 @@ export default defineComponent({
       startNewConversation,
       selectUserForNewConversation,
       showNewConversationScreen,
+      navigateToMain,
     };
   },
 });
