@@ -6,6 +6,7 @@ import OrderManagment from '../components/OrderManagment/OrderManagment.vue';
 import Menu from '../components/Menu/Menu.vue';
 import CalendarView from '../components/CalendarView/CalendarView.vue';
 import MessageBox from '../components/MessageBox/MessageBox.vue';
+import PersonalSettings from '../components/PersonalSettings/PersonalSettings.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -34,6 +35,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/MessageBox', 
     component: MessageBox
+  },
+  {
+    path: '/PersonalSettings', 
+    component: PersonalSettings
   },
 ];
 
