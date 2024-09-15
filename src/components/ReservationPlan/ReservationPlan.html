@@ -135,6 +135,18 @@
   </div>
 </div>
 
+  <!-- Reservation Pop-up -->
+  <ReservationPopUp
+    v-if="showPopup"
+    :showPopup="showPopup"
+    :reservation="currentReservation"
+    @close="closePopup"
+    @update="updateReservation"
+    @cancel="cancelReservation"
+    @create="createNewReservation"
+  />
+
+
 <br><br><br><br>
 <div class="row justify-content-center mb-3">
   <div class="col-12 text-center">
@@ -143,3 +155,4 @@
     </ul>
   </div>
 </div>
+
