@@ -1,29 +1,62 @@
-<div class="reservation-popup" v-if="showPopup">
-  <div class="popup-header">
-    <h3>Rezervasyon Detayları</h3>
-    <button type="button" class="close-btn" @click="closePopup">&times;</button>
-  </div>
-  
-  <div class="popup-body">
-    <p><strong>Rezervasyon Saati:</strong> {{ reservation.time || 'Belirtilmemiş' }}</p>
-    <p><strong>Rezervasyon Yapan:</strong> {{ reservation.name || 'Belirtilmemiş' }}</p>
+<div class="reservation-popup modal-dialog-centered" v-if="showPopup">
+  <div class="modal-content p-4">
+    <!-- Display the selected table number -->
+    <h3 class="modal-title text-center mb-4">Masa: {{ selectedTable }}</h3>
 
-    <!-- Rezervasyon Saatini Değiştir -->
-    <div class="mb-3">
-      <label for="reservationTime" class="form-label">Rezervasyon Saati</label>
-      <input type="time" id="reservationTime" class="form-control" v-model="reservation.time">
+    <!-- List existing reservations for the table -->
+    <div v-if="reservations.length > 0">
+      <h5 class="mb-3">Mevcut Rezervasyonlar:</h5>
+      <ul class="list-group mb-4">
+        <li v-for="res in reservations" :key="res.id"
+            class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+            @click="selectReservation(res)">
+          <div>
+            <strong>Tarih:</strong> {{ res.date }} <br>
+            <strong>Saati:</strong> {{ res.time }} <br>
+            <strong>Yapan:</strong> {{ res.name }}
+          </div>
+          <span class="badge bg-primary">Seç</span>
+        </li>
+      </ul>
     </div>
 
-    <div class="mb-3">
-      <label for="reservationName" class="form-label">Rezervasyon Yapan İsim</label>
-      <input type="text" id="reservationName" class="form-control" v-model="reservation.name" placeholder="İsim Girin">
+    <!-- Reservation Form for New or Selected Reservation -->
+    <div v-if="selectedReservation">
+      <h5 class="mb-3">Rezervasyonu Güncelle</h5>
+      <div class="form-group mb-3">
+        <label for="update-date">Rezervasyon Tarihi</label>
+        <input type="date" v-model="selectedReservation.date" class="form-control" id="update-date">
+      </div>
+      <div class="form-group mb-3">
+        <label for="update-time">Rezervasyon Saati</label>
+        <input type="time" v-model="selectedReservation.time" class="form-control" id="update-time">
+      </div>
+      <div class="form-group mb-4">
+        <label for="update-name">Rezervasyon Yapan İsim</label>
+        <input type="text" v-model="selectedReservation.name" class="form-control" id="update-name">
+      </div>
+      <button class="btn btn-primary w-100 mb-2" @click="updateReservation">Rezervasyonu Güncelle</button>
+      <button class="btn btn-danger w-100 mb-4" @click="cancelReservation">Rezervasyonu İptal Et</button>
     </div>
-  </div>
-  
-  <div class="popup-footer">
-    <button class="btn btn-primary" @click="updateReservation">Güncelle</button>
-    <button class="btn btn-danger" @click="cancelReservation">İptal Et</button>
-    <button class="btn btn-success" @click="createNewReservation">Yeni Rezervasyon</button>
-    <button class="btn btn-secondary" @click="closePopup">Kapat</button>
+
+    <!-- If no reservation is selected, show form for new reservation -->
+    <div v-if="!selectedReservation">
+      <h5 class="mb-3">Yeni Rezervasyon Oluştur</h5>
+      <div class="form-group mb-3">
+        <label for="new-date">Rezervasyon Tarihi</label>
+        <input type="date" v-model="newReservation.date" class="form-control" id="new-date">
+      </div>
+      <div class="form-group mb-3">
+        <label for="new-time">Rezervasyon Saati</label>
+        <input type="time" v-model="newReservation.time" class="form-control" id="new-time">
+      </div>
+      <div class="form-group mb-4">
+        <label for="new-name">Rezervasyon Yapan İsim</label>
+        <input type="text" v-model="newReservation.name" class="form-control" id="new-name">
+      </div>
+      <button class="btn btn-success w-100 mb-2" @click="createNewReservation">Yeni Rezervasyon Oluştur</button>
+    </div>
+
+    <button class="btn btn-secondary w-100" @click="closePopup">Kapat</button>
   </div>
 </div>

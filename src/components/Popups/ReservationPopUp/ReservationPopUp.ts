@@ -1,40 +1,50 @@
-import { defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
+import { defineComponent, ref } from 'vue';
+
+interface Reservation {
+  id: string;
+  time: string;
+  name: string;
+  date: string;
+}
 
 export default defineComponent({
   name: 'ReservationPopUp',
   props: {
     showPopup: Boolean,
-    reservation: Object,
+    reservations: Array as () => Reservation[],
+    selectedReservation: Object as () => Reservation | null,
+    selectedTable: String,
   },
-  emits: ['close', 'update', 'cancel', 'create'],
+  emits: ['close', 'update', 'cancel', 'create', 'select'],
   setup(props, { emit }) {
-    const router = useRouter();
+    const newReservation = ref<Reservation>({ time: '', name: '', date: '', id: '' });
 
     function closePopup() {
       emit('close');
     }
 
     function updateReservation() {
-      if (props.reservation) {
-        emit('update', props.reservation); // props.reservation null veya undefined değilse update yap
+      if (props.selectedReservation) {
+        emit('update', props.selectedReservation);
       }
     }
 
     function cancelReservation() {
-      if (props.reservation?.id) {
-        emit('cancel', props.reservation.id); // props.reservation ve id null değilse iptal et
+      if (props.selectedReservation) {
+        emit('cancel', props.selectedReservation.id);
       }
     }
 
     function createNewReservation() {
-      if (props.reservation) {
-        emit('create', props.reservation); // props.reservation null veya undefined değilse rezervasyon oluştur
+      if (!newReservation.value.name.trim()) {
+        alert('Lütfen rezervasyon yapan ismi giriniz.');
+        return;
       }
+      emit('create', newReservation.value);
     }
 
-    function navigateToMain() {
-      router.push({ path: '/' });
+    function selectReservation(reservation: Reservation) {
+      emit('select', reservation);
     }
 
     return {
@@ -42,7 +52,8 @@ export default defineComponent({
       updateReservation,
       cancelReservation,
       createNewReservation,
-      navigateToMain,
+      selectReservation,
+      newReservation,
     };
   },
 });
