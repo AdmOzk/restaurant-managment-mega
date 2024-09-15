@@ -7,6 +7,7 @@ import Menu from '../components/Menu/Menu.vue';
 import CalendarView from '../components/CalendarView/CalendarView.vue';
 import MessageBox from '../components/MessageBox/MessageBox.vue';
 import PersonalSettings from '../components/PersonalSettings/PersonalSettings.vue';
+import ReservationPlan from  '../components/ReservationPlan/ReservationPlan.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -39,6 +40,10 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/PersonalSettings', 
     component: PersonalSettings
+  },
+  {
+    path: '/ReservationPlan', 
+    component: ReservationPlan
   },
 ];
 

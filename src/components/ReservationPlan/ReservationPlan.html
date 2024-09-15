@@ -1,0 +1,145 @@
+<div class="container mt-5">
+  <!-- Deniz Row -->
+  <div class="row justify-content-center mb-3">
+    <div class="col-12 text-center">
+      <span class="badge bg-primary">Deniz</span>
+    </div>
+  </div>
+
+  <!-- I1 to I10 Row -->
+  <div class="row justify-content-center mb-3 g-2">
+    <div class="col-auto" @click="navigateToReservation('I1')">
+      <div class="ReservationPlan-box p-3 text-center">I1</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I2')">
+      <div class="ReservationPlan-box p-3 text-center">I2</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I3')">
+      <div class="ReservationPlan-box p-3 text-center">I3</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I4')">
+      <div class="ReservationPlan-box p-3 text-center">I4</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I5')">
+      <div class="ReservationPlan-box p-3 text-center">I5</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I6')">
+      <div class="ReservationPlan-box p-3 text-center">I6</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I7')">
+      <div class="ReservationPlan-box p-3 text-center">I7</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I8')">
+      <div class="ReservationPlan-box p-3 text-center">I8</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I9')">
+      <div class="ReservationPlan-box p-3 text-center">I9</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('I10')">
+      <div class="ReservationPlan-box p-3 text-center">I10</div>
+    </div>
+  </div>
+
+  <!-- Separator Row -->
+  <div class="row justify-content-center mb-3">
+    <div class="col-12 text-center">
+      <span class="badge bg-secondary"></span>
+    </div>
+  </div>
+
+  <!-- S1 to S10 Row -->
+  <div class="row justify-content-between mb-3 g-1">
+    <div class="col-auto" @click="navigateToReservation('S1')">
+      <div class="ReservationPlan-box p-2 text-center">S1</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S2')">
+      <div class="ReservationPlan-box p-3 text-center">S2</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S3')">
+      <div class="ReservationPlan-box p-3 text-center">S3</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S4')">
+      <div class="ReservationPlan-box p-3 text-center">S4</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S5')">
+      <div class="ReservationPlan-box p-3 text-center">S5</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S6')">
+      <div class="ReservationPlan-box p-3 text-center">S6</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S7')">
+      <div class="ReservationPlan-box p-3 text-center">S7</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S8')">
+      <div class="ReservationPlan-box p-3 text-center">S8</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S9')">
+      <div class="ReservationPlan-box p-3 text-center">S9</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('S10')">
+      <div class="ReservationPlan-box p-2 text-center">S10</div>
+    </div>
+  </div>
+
+  <!-- WC ve M2 Row (Sağ ve Sol Orta) -->
+  <div class="row justify-content-between mb-3">
+    <div class="col-auto d-flex flex-column align-items-center">
+      <div class="ReservationPlan-box p-3 text-center mb-2" style="cursor: not-allowed; opacity: 0.5;">WC</div>
+      <div class="ReservationPlan-box p-3 text-center mt-2" style="cursor: not-allowed; opacity: 0.5;">M1</div>
+    </div>
+    <div class="col-auto d-flex flex-column align-items-center">
+      <div class="ReservationPlan-box p-3 text-center mb-2" style="cursor: not-allowed; opacity: 0.5;">M2</div>
+      <div class="ReservationPlan-box p-3 text-center mt-2" style="cursor: not-allowed; opacity: 0.5;">YO</div>
+    </div>
+  </div>
+
+  <!-- G1 to G10 Row -->
+  <div class="row justify-content-between mb-3 g-1">
+    <div class="col-auto" @click="navigateToReservation('G1')">
+      <div class="ReservationPlan-box p-2 text-center">G1</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G2')">
+      <div class="ReservationPlan-box p-3 text-center">G2</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G3')">
+      <div class="ReservationPlan-box p-3 text-center">G3</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G4')">
+      <div class="ReservationPlan-box p-3 text-center">G4</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G5')">
+      <div class="ReservationPlan-box p-3 text-center">G5</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G6')">
+      <div class="ReservationPlan-box p-3 text-center">G6</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G7')">
+      <div class="ReservationPlan-box p-3 text-center">G7</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G8')">
+      <div class="ReservationPlan-box p-3 text-center">G8</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G9')">
+      <div class="ReservationPlan-box p-3 text-center">G9</div>
+    </div>
+    <div class="col-auto" @click="navigateToReservation('G10')">
+      <div class="ReservationPlan-box p-2 text-center">G10</div>
+    </div>
+  </div>
+</div>  
+
+<br>
+<div class="row justify-content-center mb-3">
+  <div class="col-12 text-center">
+    <span class="badge bg-success">Giriş</span>
+  </div>
+</div>
+
+<br><br><br><br>
+<div class="row justify-content-center mb-3">
+  <div class="col-12 text-center">
+    <ul class="list-unstyled">
+      <li class="mb-3"><button class="btn btn-primary btn-lg w-100" @click="navigateToMain" v-if="!isEditing">Ana sayfaya dön</button></li>
+    </ul>
+  </div>
+</div>

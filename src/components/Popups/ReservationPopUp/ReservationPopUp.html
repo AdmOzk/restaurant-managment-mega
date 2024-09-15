@@ -1,0 +1,15 @@
+<div class="reservation-popup" v-if="showPopup">
+  <h3>Rezervasyon Detayları</h3>
+  <p>Rezervasyon Saati: {{ reservation.time || 'Belirtilmemiş' }}</p>
+  <p>Rezervasyon Yapan: {{ reservation.name || 'Belirtilmemiş' }}</p>
+
+  <!-- Rezervasyon Saatini Değiştir -->
+  <input type="time" v-model="reservation.time" placeholder="Rezervasyon Saati">
+  <input type="text" v-model="reservation.name" placeholder="Rezervasyon Yapan İsim">
+
+  <!-- Pop-up Aksiyonları -->
+  <button @click="updateReservation">Rezervasyonu Güncelle</button>
+  <button @click="cancelReservation">Rezervasyonu İptal Et</button>
+  <button @click="createNewReservation">Yeni Rezervasyon Oluştur</button>
+  <button @click="closePopup">Kapat</button>
+</div>
